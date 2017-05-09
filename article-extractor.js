@@ -1,12 +1,12 @@
 var articleText,
-  articles,
-  sections,
+  content,
   sortByInnerHTML = function(a,b) { return (a.innerHTML.length < b.innerHTML.length) ? 1 : -1; };
 
-articles = new Array().slice.call(document.getElementsByTagName('article'));
-sections = new Array().slice.call(document.getElementsByTagName('section'));
+content = ['article','section'].reduce(function(accumulator, tag) {
+  return accumulator.concat(Array.from(document.getElementsByTagName(tag)));
+}, []);
 
-articleText = articles.concat(sections).sort(sortByInnerHTML)[0].innerHTML;
+articleText = content.sort(sortByInnerHTML)[0].innerHTML;
 
 if (articleText.indexOf('footer') > 0) {
   articleText = articleText.substring(0, articleText.indexOf('footer'));
