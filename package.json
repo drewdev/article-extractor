@@ -1,0 +1,14 @@
+{
+  "name": "article-extractor",
+  "version": "1.0.0",
+  "description": "A bookmarklet for extracting article text from webpages sans ads, site navs, et alia sturcus",
+  "main": "article-extractor.js",
+  "scripts": {
+    "generate": "bookmarklet article-extractor.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bookmarklet": "0.0.6"
+  }
+}
