@@ -1,8 +1,7 @@
 var articleText,
   articles,
   sections,
-  content = [],
-  sortByInnerHTML = function(a,b) { return (a.innerHTML.length < b.innerHTML.length) ? a : b; };
+  sortByInnerHTML = function(a,b) { return (a.innerHTML.length < b.innerHTML.length) ? 1 : -1; };
 
 articles = document.getElementsByTagName('article');
 sections = document.getElementsByTagName('section');
