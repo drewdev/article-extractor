@@ -1,15 +1,35 @@
-var articleText,
-  content,
+var matchedElements,
+  targetedContent,
+  scrubbedContent,
+  extractedArticle,
   sortByInnerHTML = function(a,b) { return (a.innerHTML.length < b.innerHTML.length) ? 1 : -1; };
 
-content = ['article','section'].reduce(function(accumulator, tag) {
+function scrub(tagName, raw) {
+  if (raw.indexOf('<' + tagName) > 0) {
+    var openingSelector = '<' + tagName,
+      closingSelector = '</' + tagName + '>',
+      startIndex = raw.indexOf(openingSelector),
+      endIndex = raw.indexOf(closingSelector) + closingSelector.length - 1
+    raw = raw.substring(0,startIndex) + raw.substring(endIndex, raw.length - 1)
+    return scrub(tagName, raw)
+  } else {
+    return raw;
+  }
+}
+
+matchedElements = ['article','section'].reduce(function(accumulator, tag) {
   return accumulator.concat(Array.from(document.getElementsByTagName(tag)));
 }, []);
 
-articleText = content.sort(sortByInnerHTML)[0].innerHTML;
+targetedContent = matchedElements.sort(sortByInnerHTML)[0];
 
-if (articleText.indexOf('footer') > 0) {
-  articleText = articleText.substring(0, articleText.indexOf('footer'));
-}
+scrubbedContent = ['iframe','footer'].reduce(function(accumulator, tagToScrub) {
+  return accumulator = scrub(tagToScrub, accumulator);
+}, targetedContent.innerHTML);
 
-document.getElementsByTagName('body')[0].innerHTML = articleText;
+
+extractedArticle = '<' + targetedContent.tagName + '>' +
+  scrubbedContent +
+  '</' + targetedContent.tagName + '>';
+
+document.getElementsByTagName('body')[0].innerHTML = extractedArticle;
