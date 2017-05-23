@@ -2,6 +2,8 @@ var matchedElements,
   targetedContent,
   scrubbedContent,
   extractedArticle,
+  elementsToSelect = ['article','section'],
+  tagsToScrub = ['style','noscript','script','iframe','footer'],
   sortByInnerHTML = function(a,b) { return (a.innerHTML.length < b.innerHTML.length) ? 1 : -1; };
 
 function scrub(tagName, raw) {
@@ -17,19 +19,22 @@ function scrub(tagName, raw) {
   }
 }
 
-matchedElements = ['article','section'].reduce(function(accumulator, tag) {
+matchedElements = elementsToSelect.reduce(function(accumulator, tag) {
   return accumulator.concat(Array.from(document.getElementsByTagName(tag)));
 }, []);
 
-targetedContent = matchedElements.sort(sortByInnerHTML)[0];
+if (matchedElements.length > 0) {
+  matchedElements.forEach(function(element) {
+    scrubbedContent = tagsToScrub.reduce(function(accumulator, tagToScrub) {
+      return accumulator = scrub(tagToScrub, accumulator);
+    }, element.innerHTML);
+  });
 
-scrubbedContent = ['iframe','footer'].reduce(function(accumulator, tagToScrub) {
-  return accumulator = scrub(tagToScrub, accumulator);
-}, targetedContent.innerHTML);
+  targetedContent = matchedElements.sort(sortByInnerHTML)[0];
 
+  extractedArticle = '<' + targetedContent.tagName + '>' +
+    scrubbedContent +
+    '</' + targetedContent.tagName + '>';
 
-extractedArticle = '<' + targetedContent.tagName + '>' +
-  scrubbedContent +
-  '</' + targetedContent.tagName + '>';
-
-document.getElementsByTagName('body')[0].innerHTML = extractedArticle;
+  document.getElementsByTagName('body')[0].innerHTML = extractedArticle;
+}
