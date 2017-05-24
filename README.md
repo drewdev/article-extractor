@@ -21,3 +21,17 @@ $ npm install
 ```
 $ npm run-script generate
 ```
+
+#### TODO
+
+The extraction logic still fails on certain pages. May need to consider an alternate approach that targets `<p>` tags that have a reasonable length of `innerText`.
+
+URLS that fail:
+- https://longreads.com/2017/05/17/chasing-the-harvest-heraclio-astete/
+- https://hacks.mozilla.org/2017/04/fathom-a-framework-for-understanding-web-pages/
+- http://nautil.us/blog/is-quantum-theory-about-reality-or-what-we-know
+- https://theindex.generalassemb.ly/an-employer-guide-to-investing-in-talent-64e649db83f1
+- https://backchannel.com/the-kids-computer-language-that-became-a-mind-bomb-for-the-hacker-ethic-a0b7e42c229d
+- https://stripe.com/blog/teaching-employees-to-code
+- https://medium.freecodecamp.com/understanding-node-js-event-driven-architecture-223292fcbc2d
+
