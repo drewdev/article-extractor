@@ -4,11 +4,15 @@
   "description": "A bookmarklet for extracting article text from webpages sans ads, site navs, et alia sturcus",
   "main": "article-extractor.js",
   "scripts": {
-    "generate": "bookmarklet article-extractor.js"
+    "generate": "bookmarklet article-extractor.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bookmarklet": "0.0.6"
+  },
+  "devDependencies": {
+    "jest": "^20.0.3"
   }
 }
