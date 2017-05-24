@@ -24,16 +24,20 @@ matchedElements = elementsToSelect.reduce(function(accumulator, tag) {
 }, []);
 
 if (matchedElements.length > 0) {
-  matchedElements.forEach(function(element) {
-    scrubbedContent = tagsToScrub.reduce(function(accumulator, tagToScrub) {
-      return accumulator = scrub(tagToScrub, accumulator);
-    }, element.innerHTML);
-  });
+  scrubbedElements = matchedElements.reduce(function(elements, element) {
+    elements.push({
+      tagName: element.tagName,
+      innerHTML: tagsToScrub.reduce(function(accumulator, tagToScrub) {
+        return scrub(tagToScrub, accumulator);
+      }, element.innerHTML)
+    });
+    return elements
+  }, []);
 
-  targetedContent = matchedElements.sort(sortByInnerHTML)[0];
+  targetedContent = scrubbedElements.sort(sortByInnerHTML)[0];
 
   extractedArticle = '<' + targetedContent.tagName + '>' +
-    scrubbedContent +
+    targetedContent.innerHTML +
     '</' + targetedContent.tagName + '>';
 
   document.getElementsByTagName('body')[0].innerHTML = extractedArticle;
