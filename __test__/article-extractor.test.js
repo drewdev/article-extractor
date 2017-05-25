@@ -1,18 +1,16 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {extract} from '../src/extract';
+import NestedArticleWithMixedScrubbableTagsFixture from './fixtures/NestedArticleWithMixedScrubbableTagsFixture.react'
 
-test('extracts article', () => {
-  const articleFixture =
-    '<div>' +
-      '<script></script>' +
-      '<article>' +
-        '<div><header>THIS IS THE HEADER OF THE ARTICLE</header></div>' +
-        '<div><section><p>Here is some article text that we want to match</p></section></div>' +
-        '<div><div><iframe></iframe></div></div>' +
-        '<div><section><p>Here is some more article text that we want to match</p></section></div>' +
-        '<div><footer><p>Maybe we want this one</p></footer></div>' +
-      '</article>' +
-    '</div>';
-  document.body.innerHTML = articleFixture;
+beforeEach(() => {
+  document.body.innerHTML = '';
+  let div = document.createElement('div')
+  div.setAttribute('id', 'container');
+  document.body.appendChild(div);
+})
 
+test('extracts nested article with embedded mixed tags to scrub', () => {
+  ReactDOM.render(<NestedArticleWithMixedScrubbableTagsFixture />, document.getElementById('container'));
   expect(extract(document).body.innerHTML).toMatchSnapshot();
 });
