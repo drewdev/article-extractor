@@ -5,7 +5,7 @@ export function extract(content) {
   let extractedArticle;
 
   const elementsToSelect = ['article','section'];
-  const tagsToScrub = ['style','noscript','script','iframe','footer'];
+  const tagsToScrub = ['style','noscript','script','iframe','footer','gpt-ad'];
   const sortByInnerHTML = (a,b) => (a.innerHTML.length < b.innerHTML.length) ? 1 : -1;
 
   function scrub(tagName, raw) {
