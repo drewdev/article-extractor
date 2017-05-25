@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extracts article 1`] = `"<article><div><header>THIS IS THE HEADER OF THE ARTICLE</header></div><div><section><p>Here is some article text that we want to match</p></section></div><div><div></div></div><div><section><p>Here is some more article text that we want to match</p></section></div><div></div></article>"`;

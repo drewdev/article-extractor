@@ -2,13 +2,22 @@
   "name": "article-extractor",
   "version": "1.0.0",
   "description": "A bookmarklet for extracting article text from webpages sans ads, site navs, et alia sturcus",
-  "main": "article-extractor.js",
+  "main": "src/main.js",
   "scripts": {
-    "generate": "bookmarklet article-extractor.js"
+    "build": "browserify src/main.js -o build/bundle.js -t [ babelify --presets [ env ] ]",
+    "generate": "bookmarklet build/bundle.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bookmarklet": "0.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.3.0",
+    "jest": "^20.0.4"
   }
 }
