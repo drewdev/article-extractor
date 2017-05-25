@@ -1,4 +1,4 @@
-import {extract} from '../src/article-extractor';
+import {extract} from '../src/extract';
 
 test('extracts article', () => {
   const articleFixture =

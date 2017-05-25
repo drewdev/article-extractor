@@ -10,12 +10,12 @@ export function extract(content) {
 
   function scrub(tagName, raw) {
     if (raw.indexOf(`<${tagName}`) > 0) {
-      var openingSelector = `<${tagName}`,
-        closingSelector = `</${tagName}>`,
-        startIndex = raw.indexOf(openingSelector),
-        endIndex = raw.indexOf(closingSelector) + closingSelector.length - 1,
-        transformed;
-      transformed = raw.substring(0,startIndex) + raw.substring(endIndex + 1, raw.length)
+      const openingSelector = `<${tagName}`;
+      const closingSelector = `</${tagName}>`;
+      const startIndex = raw.indexOf(openingSelector);
+      const endIndex = raw.indexOf(closingSelector) + closingSelector.length - 1;
+
+      let transformed = raw.substring(0,startIndex) + raw.substring(endIndex + 1, raw.length)
       return scrub(tagName, transformed)
     } else {
       return raw;

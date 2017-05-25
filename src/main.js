@@ -1,3 +1,3 @@
-import {extract} from './article-extractor';
+import {extract} from './extract';
 
 extract(document);
